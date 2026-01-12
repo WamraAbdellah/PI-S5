@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Honeypot Monitoring Dashboard</title>
+    <style>
+      body {
+        font-family: Arial;
+        background: #0f172a;
+        color: #e5e7eb;
+      }
+      h1 {
+        color: #38bdf8;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #334155;
+        padding: 8px;
+      }
+      th {
+        background: #1e293b;
+      }
+      tr:nth-child(even) {
+        background: #020617;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🛡 Honeypot Monitoring Dashboard</h1>
+
+    <table>
+      <tr>
+        <th>Timestamp</th>
+        <th>Scenario</th>
+        <th>Severity</th>
+        <th>Details</th>
+      </tr>
+
+      {% for alert in alerts %}
+      <tr>
+        <td>{{ alert.timestamp or alert.received_at }}</td>
+        <td>{{ alert.scenario }}</td>
+        <td>{{ alert.severity }}</td>
+        <td><pre>{{ alert | tojson(indent=2) }}</pre></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
