@@ -3,7 +3,7 @@ import datetime
 
 app = Flask(__name__)
 
-# Stockage simple en mémoire (suffisant pour PFE)
+# Stockage simple en mémoire
 alerts = []
 
 @app.route("/api/alert", methods=["POST"])
@@ -12,7 +12,7 @@ def receive_alert():
     data["received_at"] = datetime.datetime.utcnow().isoformat()
     alerts.append(data)
 
-    # 🔔 AFFICHAGE TERMINAL
+    # AFFICHAGE TERMINAL
     print("\n========== 📡 ALERT RECEIVED ==========")
     for k, v in data.items():
         print(f"{k}: {v}")
